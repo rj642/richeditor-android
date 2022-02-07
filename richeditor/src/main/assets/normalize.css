@@ -88,6 +88,14 @@ abbr[title] {
   text-decoration: underline dotted; /* 2 */
 }
 
+blockquote {
+    margin: 0px;
+    padding-left: 1.5em;
+    font-style: italic;
+    overflow: hidden;
+   	border-left: 2px solid red;
+}
+
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
