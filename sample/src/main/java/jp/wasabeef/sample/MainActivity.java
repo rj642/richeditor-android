@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     mEditor = (RichEditor) findViewById(R.id.editor);
     mEditor.setEditorHeight(200);
     mEditor.setEditorFontSize(22);
-    mEditor.setEditorFontColor(Color.RED);
+    mEditor.setEditorFontColor(Color.BLACK);
     //mEditor.setEditorBackgroundColor(Color.BLUE);
     //mEditor.setBackgroundColor(Color.BLUE);
     //mEditor.setBackgroundResource(R.drawable.bg);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        mEditor.setBold();
+        mEditor.setCodeBlock();
       }
     });
 

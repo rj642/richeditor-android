@@ -180,6 +180,10 @@ RE.setBlockquote = function() {
     document.execCommand('formatBlock', false, '<blockquote>');
 }
 
+RE.setBlockCode = function() {
+    document.execCommand('formatBlock', false, '<pre>');
+}
+
 RE.insertImage = function(url, alt) {
     var html = '<img src="' + url + '" alt="' + alt + '" />';
     RE.insertHTML(html);

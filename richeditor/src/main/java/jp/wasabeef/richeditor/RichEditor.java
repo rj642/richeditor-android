@@ -290,6 +290,10 @@ public class RichEditor extends WebView {
     exec("javascript:RE.setBold();");
   }
 
+  public void setCodeBlock() {
+    exec("javascript:RE.setBlockCode();");
+  }
+
   public void setItalic() {
     exec("javascript:RE.setItalic();");
   }
