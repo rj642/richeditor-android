@@ -18,6 +18,11 @@
 `RichEditor for Android` is a beautiful Rich Text `WYSIWYG Editor` for `Android`.
 
 - _Looking for iOS? Check out_ [cjwirth/RichEditorView](https://github.com/cjwirth/RichEditorView)
+### What's New
+- Added Blockquote bar at the beginning
+- Code block is also added
+
+**More designs in development**
 
 Supported Functions
 ---
