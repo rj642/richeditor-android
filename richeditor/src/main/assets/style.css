@@ -41,3 +41,12 @@ body {
   content: attr(placeholder);
   opacity: .5;
 }
+
+.blockquote {
+ margin: 0px;
+    padding-left: 1.0em;
+    font-style: italic;
+    overflow: hidden;
+    font-color: red;
+   	border-left: 4px solid rgb(218, 225, 233);
+}

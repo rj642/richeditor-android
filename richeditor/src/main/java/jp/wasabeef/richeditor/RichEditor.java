@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -59,7 +60,8 @@ public class RichEditor extends WebView {
     JUSTIFYCENTER,
     JUSTIFYFULL,
     JUSTIFYLEFT,
-    JUSTIFYRIGHT
+    JUSTIFYRIGHT,
+    QUOTEBLOCK,
   }
 
   public interface OnTextChangeListener {
@@ -101,7 +103,15 @@ public class RichEditor extends WebView {
     setVerticalScrollBarEnabled(false);
     setHorizontalScrollBarEnabled(false);
     getSettings().setJavaScriptEnabled(true);
-    setWebChromeClient(new WebChromeClient());
+    setWebChromeClient(new WebChromeClient() {
+      @Override
+      public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+        Log.d("MyApplication", consoleMessage.message() + " -- From line "
+          + consoleMessage.lineNumber() + " of "
+          + consoleMessage.sourceId());
+        return super.onConsoleMessage(consoleMessage);
+      }
+    });
     setWebViewClient(createWebviewClient());
     loadUrl(SETUP_HTML);
 

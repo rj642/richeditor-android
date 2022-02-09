@@ -96,6 +96,15 @@ blockquote {
    	border-left: 4px solid rgb(218, 225, 233);
 }
 
+.blockquote {
+ margin: 0px;
+    padding-left: 1.0em;
+    font-style: italic;
+    overflow: hidden;
+    font-color: red;
+   	border-left: 4px solid rgb(218, 225, 233);
+}
+
 
 
 /**
@@ -117,6 +126,7 @@ pre {
   border: 1px solid rgb(47, 51, 54);
   padding: 0.75em 1em;
   font-size: 13px;
+  overflow: auto;
 }
 
 kbd,

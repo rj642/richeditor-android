@@ -19,6 +19,7 @@
  */
 
 var RE = {};
+var blockquoteValue = false;
 
 RE.currentSelection = {
     "startContainer": 0,
@@ -177,7 +178,12 @@ RE.setJustifyRight = function() {
 }
 
 RE.setBlockquote = function() {
+    blockquoteValue = true;
     document.execCommand('formatBlock', false, '<blockquote>');
+}
+
+RE.setDiv = function() {
+    document.execCommand('formatBlock', false, '<div>');
 }
 
 RE.setBlockCode = function() {
@@ -354,10 +360,30 @@ RE.removeFormat = function() {
     document.execCommand('removeFormat', false, null);
 }
 
+RE.forwardDelete = function() {
+    document.execCommand('forwardDelete', false, null);
+}
+
 // Event Listeners
 RE.editor.addEventListener("input", RE.callback);
 RE.editor.addEventListener("keyup", function(e) {
-    var KEY_LEFT = 37, KEY_RIGHT = 39;
+    var KEY_LEFT = 37, KEY_RIGHT = 39, KEY_ENTER = 13;
+    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER) {
+        RE.setDiv();
+        var elems = document.body.getElementsByTagName("*");
+
+        for (let x=0; x<elems.length; x++) {
+          let d = elems[x];
+
+          if (d.localName == "pre" && d.innerText == "\n") {
+            elems[x].remove();
+          }
+
+          if (d.localName == "blockquote" && d.innerText == "\n") {
+            elems[x].remove();
+          }
+        }
+    }
     if (e.which == KEY_LEFT || e.which == KEY_RIGHT) {
         RE.enabledEditingItems(e);
     }
