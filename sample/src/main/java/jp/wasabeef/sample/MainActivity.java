@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
   private WriteCustomButton textBoldButton;
   private WriteCustomButton textQuoteButton;
   private WriteCustomButton textItalicButton;
+  private WriteCustomButton textTodoButton;
+  private WriteCustomButton textCodeButton;
+  private WriteCustomButton textStrikeButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,23 +62,61 @@ public class MainActivity extends AppCompatActivity {
           WriteCustomButton button = (WriteCustomButton) view;
 
           mEditor.clearAndFocusEditor();
-          if(button.getId() == R.id.action_bold)
+          if(button.getId() == R.id.action_bold) {
             mEditor.setBold();
+            mEditor.activeStyle = "bold";
+          }
           else if (button.getId() == R.id.action_blockquote) {
             mEditor.setBlockquote();
-            mEditor.quoteActive = true;
+            mEditor.activeStyle = "quote";
           }
           else if (button.getId() == R.id.action_italic) {
             mEditor.setItalic();
+            mEditor.activeStyle = "italic";
+          }
+          else if (button.getId() == R.id.action_strikethrough) {
+            mEditor.setStrikeThrough();
+            mEditor.activeStyle = "strike";
+          }
+          else if (button.getId() == R.id.action_insert_checkbox) {
+            mEditor.insertTodo();
+            mEditor.activeStyle = "todo";
+          }
+          else if (button.getId() == R.id.action_insert_link) {
+            mEditor.setCodeBlock();
+            mEditor.activeStyle = "code";
           }
           if(button.getCheckedState()) {
             button.setColorFilter(Color.WHITE);
             button.switchCheckedState();
-            mEditor.quoteActive = false;
+            mEditor.activeStyle = "none";
           }
           else {
             button.setColorFilter(Color.BLUE);
             button.switchCheckedState();
+            switch (button.getId()) {
+              case R.id.action_bold:
+                mEditor.activeStyle = "bold";
+                break;
+              case R.id.action_italic:
+                mEditor.activeStyle = "italic";
+                break;
+              case R.id.action_strikethrough:
+                mEditor.activeStyle = "strike";
+                break;
+              case R.id.action_blockquote:
+                mEditor.activeStyle = "quote";
+                break;
+              case R.id.action_insert_link:
+                mEditor.activeStyle = "code";
+                break;
+              case R.id.action_insert_checkbox:
+                mEditor.activeStyle = "todo";
+                break;
+              default:
+                mEditor.activeStyle = "none";
+                break;
+            }
           }
 
         }
@@ -85,32 +126,64 @@ public class MainActivity extends AppCompatActivity {
     mEditor.setOnDecorationChangeListener(new RichEditor.OnDecorationStateListener() {
       @Override public void onStateChangeListener(String text, List<RichEditor.Type> types) {
         Buttons = new ArrayList<>(
-          Arrays.asList(textBoldButton, textQuoteButton, textItalicButton));
+          Arrays.asList(textBoldButton, textQuoteButton, textItalicButton, textTodoButton, textStrikeButton));
         for(RichEditor.Type type : types) {
           switch(type) {
             case BOLD:
               textBoldButton.setColorFilter(Color.BLUE);
-              if(!textBoldButton.getCheckedState())
+              mEditor.activeStyle = "bold";
+              if(!textBoldButton.getCheckedState()) {
                 textBoldButton.switchCheckedState();
+              }
               Buttons.remove(textBoldButton);
               break;
             case QUOTEBLOCK:
               textQuoteButton.setColorFilter(Color.BLUE);
-              if(!textQuoteButton.getCheckedState())
+              if(!textQuoteButton.getCheckedState()) {
                 textQuoteButton.switchCheckedState();
+                mEditor.activeStyle = "quote";
+              }
               Buttons.remove(textQuoteButton);
               break;
             case ITALIC:
               textItalicButton.setColorFilter(Color.BLUE);
-              if (!textItalicButton.getCheckedState())
+              if (!textItalicButton.getCheckedState()) {
                 textItalicButton.switchCheckedState();
+                mEditor.activeStyle = "italic";
+              }
               Buttons.remove(textItalicButton);
+              break;
+            case TODO:
+              textTodoButton.setColorFilter(Color.BLUE);
+              if (!textTodoButton.getCheckedState()) {
+                textTodoButton.switchCheckedState();
+                mEditor.activeStyle = "todo";
+              }
+              Buttons.remove(textTodoButton);
+              break;
+            case CODEBLOCK:
+              textCodeButton.setColorFilter(Color.BLUE);
+              if (!textCodeButton.getCheckedState()) {
+                textCodeButton.switchCheckedState();
+                mEditor.activeStyle = "code";
+              }
+              Buttons.remove(textCodeButton);
+              break;
+            case STRIKETHROUGH:
+              textStrikeButton.setColorFilter(Color.BLUE);
+              if (!textStrikeButton.getCheckedState()) {
+                textStrikeButton.switchCheckedState();
+                mEditor.activeStyle = "strike";
+              }
+              Buttons.remove(textStrikeButton);
               break;
           }
         }
         for(WriteCustomButton button : Buttons){
           button.setColorFilter(Color.WHITE);
           button.setCheckedState(false);
+          mEditor.activeStyle = "none";
+
         }
       }
     });
@@ -150,6 +223,18 @@ public class MainActivity extends AppCompatActivity {
 
     textItalicButton.setOnClickListener(decorationButtonListener);
 
+    textTodoButton = findViewById(R.id.action_insert_checkbox);
+
+    textTodoButton.setOnClickListener(decorationButtonListener);
+
+    textCodeButton = findViewById(R.id.action_insert_link);
+
+    textCodeButton.setOnClickListener(decorationButtonListener);
+
+    textStrikeButton = findViewById(R.id.action_strikethrough);
+
+    textStrikeButton.setOnClickListener(decorationButtonListener);
+
     /*findViewById(R.id.action_italic).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -171,12 +256,12 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    findViewById(R.id.action_strikethrough).setOnClickListener(new View.OnClickListener() {
+    /*findViewById(R.id.action_strikethrough).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mEditor.setStrikeThrough();
       }
-    });
+    });*/
 
     findViewById(R.id.action_underline).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -332,17 +417,17 @@ public class MainActivity extends AppCompatActivity {
     //  }
     //});
 
-    findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
+    /*findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mEditor.insertLink("https://github.com/wasabeef", "wasabeef");
       }
-    });
-    findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
+    });*/
+    /*findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mEditor.insertTodo();
       }
-    });
+    });*/
   }
 }

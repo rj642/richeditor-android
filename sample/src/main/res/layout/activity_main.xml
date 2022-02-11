@@ -246,7 +246,7 @@
         android:contentDescription="@null"
         android:src="@drawable/insert_link" />
 
-      <androidx.appcompat.widget.AppCompatImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_insert_checkbox"
         android:layout_width="48dp"
         android:layout_height="48dp"

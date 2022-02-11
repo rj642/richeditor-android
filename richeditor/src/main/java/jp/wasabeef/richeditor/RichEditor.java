@@ -68,6 +68,8 @@ public class RichEditor extends WebView {
     JUSTIFYLEFT,
     JUSTIFYRIGHT,
     QUOTEBLOCK,
+    TODO,
+    CODEBLOCK,
   }
 
   public interface OnTextChangeListener {
@@ -129,15 +131,14 @@ public class RichEditor extends WebView {
     return new BaseInputConnection(this, false); //this is needed for #dispatchKeyEvent() to be notified.
   }
 
-  public Boolean quoteActive = false;
-  public Boolean codeActive = false;
+  public String activeStyle = "none";
 
   @Override
   public boolean dispatchKeyEvent(KeyEvent event) {
     boolean dispatchFirst = super.dispatchKeyEvent(event);
     // Listening here for whatever key events you need
     if (event.getAction() == KeyEvent.ACTION_UP) {
-      System.out.println(quoteActive);
+      System.out.println(activeStyle);
       System.out.println("value is as follow");
       System.out.println("Printing key");
       System.out.println(event.getKeyCode());
