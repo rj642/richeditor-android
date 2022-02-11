@@ -137,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
               case R.id.action_insert_checkbox:
                 mEditor.activeStyle = "todo";
                 break;
-              default:
-                mEditor.activeStyle = "none";
-                break;
             }
           }
 
@@ -218,8 +215,41 @@ public class MainActivity extends AppCompatActivity {
         for(WriteCustomButton button : Buttons){
           button.setColorFilter(Color.WHITE);
           button.setCheckedState(false);
-          mEditor.activeStyle = "none";
-
+          switch (button.getId()) {
+            case R.id.action_bold:
+              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                //mEditor.activeStyle = "bold";
+              } else {
+                mEditor.activeStyle = "bold";
+              }
+              break;
+            case R.id.action_italic:
+              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                //mEditor.activeStyle = "bold";
+              } else {
+                mEditor.activeStyle = "italic";
+              }
+              break;
+            case R.id.action_strikethrough:
+              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                //mEditor.activeStyle = "bold";
+              } else {
+                mEditor.activeStyle = "strike";
+              }
+              break;
+            case R.id.action_blockquote:
+              mEditor.activeStyle = "quote";
+              break;
+            case R.id.action_insert_link:
+              mEditor.activeStyle = "code";
+              break;
+            case R.id.action_insert_checkbox:
+              mEditor.activeStyle = "todo";
+              break;
+            default:
+              mEditor.activeStyle = "none";
+              break;
+          }
         }
       }
     });
