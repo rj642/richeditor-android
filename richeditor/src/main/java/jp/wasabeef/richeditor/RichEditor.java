@@ -138,6 +138,20 @@ public class RichEditor extends WebView {
     boolean dispatchFirst = super.dispatchKeyEvent(event);
     // Listening here for whatever key events you need
     if (event.getAction() == KeyEvent.ACTION_UP) {
+      if (event.getKeyCode() == 66) {
+        if (activeStyle == "quote") {
+          exec("javascript:RE.removeBlockquote();");
+          // remove active style from quote.
+        }
+        if (activeStyle == "code") {
+          exec("javascript:RE.removeCodeblock();");
+          // remove activeStyle from code.
+        }
+        if (activeStyle == "todo") {
+          exec("javascript:RE.removeCodeblock();");
+          // remove activeStyle from
+        }
+      }
       System.out.println(activeStyle);
       System.out.println("value is as follow");
       System.out.println("Printing key");
@@ -352,7 +366,7 @@ public class RichEditor extends WebView {
   }
 
   public void setSubscript() {
-    exec("javascript:RE.setSubscript();");
+    exec("javascript:RE.setBlockCode();");
   }
 
   public void setSuperscript() {

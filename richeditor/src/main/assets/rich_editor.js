@@ -381,28 +381,38 @@ RE.forwardDelete = function() {
     document.execCommand('forwardDelete', false, null);
 }
 
+RE.removeBlockquote = function() {
+  console.log('its running here at quote')
+  RE.setDiv();
+}
+
+RE.removeCodeblock = function() {
+  console.log('its running here at code')
+  RE.setDiv();
+}
+
 // Event Listeners
 RE.editor.addEventListener("input", RE.callback);
 RE.editor.addEventListener("keyup", function(e) {
     var KEY_LEFT = 37, KEY_RIGHT = 39, KEY_ENTER = 13;
-    console.log(e.keyCode,e.which, e.code,e.key)
-    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER) {
-        RE.setDiv();
-        var elems = document.body.getElementsByTagName("*");
-
-        for (let x=0; x<elems.length; x++) {
-          let d = elems[x];
-
-          if (d.localName == "pre" && d.innerText == "\n") {
-            elems[x].remove();
-          }
-
-          if (d.localName == "blockquote" && d.innerText == "\n") {
-            elems[x].remove();
-          }
-
-        }
-    }
+//    console.log(e.keyCode,e.which, e.code,e.key)
+//    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER) {
+//        RE.setDiv();
+//        var elems = document.body.getElementsByTagName("*");
+//
+//        for (let x=0; x<elems.length; x++) {
+//          let d = elems[x];
+//
+//          if (d.localName == "pre" && d.innerText == "\n") {
+//            elems[x].remove();
+//          }
+//
+//          if (d.localName == "blockquote" && d.innerText == "\n") {
+//            elems[x].remove();
+//          }
+//
+//        }
+//    }
     if (e.which == KEY_LEFT || e.which == KEY_RIGHT) {
         RE.enabledEditingItems(e);
     }
