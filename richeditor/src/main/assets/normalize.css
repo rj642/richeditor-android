@@ -90,19 +90,23 @@ abbr[title] {
 
 blockquote {
     margin: 0px;
-    padding-left: 1.0em;
-    font-style: italic;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 0.5em;
     overflow: hidden;
-   	border-left: 4px solid rgb(218, 225, 233);
+    background: rgba(224, 250, 222, 1);
+   	border-left: 6px solid rgba(153, 207, 149, 1);
 }
 
 .blockquote {
- margin: 0px;
+    margin: 0px;
     padding-left: 1.0em;
     font-style: italic;
     overflow: hidden;
     font-color: red;
-   	border-left: 4px solid rgb(218, 225, 233);
+    background: rgba(224, 250, 222, 1);
+   	border-left: 4px solid rgba(153, 207, 149, 1);
 }
 
 

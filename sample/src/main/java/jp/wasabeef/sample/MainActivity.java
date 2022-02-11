@@ -101,7 +101,11 @@ public class MainActivity extends AppCompatActivity {
           if(button.getCheckedState()) {
             button.setColorFilter(Color.WHITE);
             button.switchCheckedState();
-            mEditor.activeStyle = "none";
+            if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+              //mEditor.activeStyle = "bold";
+            } else {
+              mEditor.activeStyle = "none";
+            }
           }
           else {
             button.setColorFilter(Color.BLUE);
@@ -137,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
               case R.id.action_insert_checkbox:
                 mEditor.activeStyle = "todo";
                 break;
+              default:
+                mEditor.activeStyle = "none";
+                break;
             }
           }
 
@@ -144,34 +151,48 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
+
+
     mEditor.setOnDecorationChangeListener(new RichEditor.OnDecorationStateListener() {
       @Override public void onStateChangeListener(String text, List<RichEditor.Type> types) {
         Buttons = new ArrayList<>(
-          Arrays.asList(textBoldButton, textQuoteButton, textItalicButton, textTodoButton, textStrikeButton));
-        for(RichEditor.Type type : types) {
-          switch(type) {
+          Arrays.asList(textBoldButton, textQuoteButton, textItalicButton, textTodoButton,
+            textStrikeButton, textCodeButton));
+        for (RichEditor.Type type : types) {
+          switch (type) {
             case BOLD:
               textBoldButton.setColorFilter(Color.BLUE);
-              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+              if (mEditor.activeStyle.equals("quote") /*|| mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")*/) {
                 //mEditor.activeStyle = "bold";
               } else {
                 mEditor.activeStyle = "bold";
               }
-              if(!textBoldButton.getCheckedState()) {
+              if (!textBoldButton.getCheckedState()) {
                 textBoldButton.switchCheckedState();
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "bold";
+                }
               }
               Buttons.remove(textBoldButton);
+              mEditor.activeStyle = "none";
               break;
             case QUOTEBLOCK:
               textQuoteButton.setColorFilter(Color.BLUE);
-              if(!textQuoteButton.getCheckedState()) {
+              mEditor.activeStyle = "quote";
+              if (!textQuoteButton.getCheckedState()) {
                 textQuoteButton.switchCheckedState();
-                mEditor.activeStyle = "quote";
               }
               Buttons.remove(textQuoteButton);
               break;
             case ITALIC:
               textItalicButton.setColorFilter(Color.BLUE);
+              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                //mEditor.activeStyle = "bold";
+              } else {
+                mEditor.activeStyle = "italic";
+              }
               if (!textItalicButton.getCheckedState()) {
                 textItalicButton.switchCheckedState();
                 if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
@@ -189,14 +210,17 @@ public class MainActivity extends AppCompatActivity {
                 mEditor.activeStyle = "todo";
               }
               Buttons.remove(textTodoButton);
+              mEditor.activeStyle = "none";
               break;
             case CODEBLOCK:
               textCodeButton.setColorFilter(Color.BLUE);
+              mEditor.activeStyle = "code";
               if (!textCodeButton.getCheckedState()) {
                 textCodeButton.switchCheckedState();
                 mEditor.activeStyle = "code";
               }
               Buttons.remove(textCodeButton);
+              mEditor.activeStyle = "none";
               break;
             case STRIKETHROUGH:
               textStrikeButton.setColorFilter(Color.BLUE);
@@ -209,47 +233,14 @@ public class MainActivity extends AppCompatActivity {
                 }
               }
               Buttons.remove(textStrikeButton);
-              break;
-          }
-        }
-        for(WriteCustomButton button : Buttons){
-          button.setColorFilter(Color.WHITE);
-          button.setCheckedState(false);
-          switch (button.getId()) {
-            case R.id.action_bold:
-              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
-                //mEditor.activeStyle = "bold";
-              } else {
-                mEditor.activeStyle = "bold";
-              }
-              break;
-            case R.id.action_italic:
-              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
-                //mEditor.activeStyle = "bold";
-              } else {
-                mEditor.activeStyle = "italic";
-              }
-              break;
-            case R.id.action_strikethrough:
-              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
-                //mEditor.activeStyle = "bold";
-              } else {
-                mEditor.activeStyle = "strike";
-              }
-              break;
-            case R.id.action_blockquote:
-              mEditor.activeStyle = "quote";
-              break;
-            case R.id.action_insert_link:
-              mEditor.activeStyle = "code";
-              break;
-            case R.id.action_insert_checkbox:
-              mEditor.activeStyle = "todo";
-              break;
-            default:
               mEditor.activeStyle = "none";
               break;
           }
+        }
+        for (WriteCustomButton button : Buttons) {
+          button.setColorFilter(Color.WHITE);
+          button.setCheckedState(false);
+          mEditor.activeStyle = "none";
         }
       }
     });
