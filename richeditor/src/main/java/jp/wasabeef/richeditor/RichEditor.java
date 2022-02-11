@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static jp.wasabeef.richeditor.RichEditor.Type.BOLD;
+
 /**
  * Copyright (C) 2020 Wasabeef
  * <p>
@@ -127,12 +129,16 @@ public class RichEditor extends WebView {
     return new BaseInputConnection(this, false); //this is needed for #dispatchKeyEvent() to be notified.
   }
 
+  public Boolean quoteActive = false;
+  public Boolean codeActive = false;
+
   @Override
   public boolean dispatchKeyEvent(KeyEvent event) {
     boolean dispatchFirst = super.dispatchKeyEvent(event);
     // Listening here for whatever key events you need
     if (event.getAction() == KeyEvent.ACTION_UP) {
-      // which mardkown button is selected ? 
+      System.out.println(quoteActive);
+      System.out.println("value is as follow");
       System.out.println("Printing key");
       System.out.println(event.getKeyCode());
       switch (event.getKeyCode()) {
@@ -259,6 +265,10 @@ public class RichEditor extends WebView {
     setBackgroundColor(color);
   }
 
+  public void clearAndFocusEditor(){
+    exec("javascript:RE.clearAndFocusEditor();");
+  }
+
   @Override
   public void setBackgroundColor(int color) {
     super.setBackgroundColor(color);
@@ -331,9 +341,13 @@ public class RichEditor extends WebView {
     exec("javascript:RE.setBlockCode();");
   }
 
-  public void setItalic() {
+  /*public void setItalic() {
     exec("javascript:RE.prepareInsert();");
     exec("javascript:RE.setTodo('" + Utils.getCurrentTime() + "');");
+  }*/
+
+  public void setItalic() {
+    exec("javascript:RE.setItalic();");
   }
 
   public void setSubscript() {

@@ -13,7 +13,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content">
 
-      <ImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/action_undo"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -21,7 +21,7 @@
         android:contentDescription="@null"
         android:src="@drawable/undo" />
 
-      <ImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/action_redo"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -29,7 +29,7 @@
         android:contentDescription="@null"
         android:src="@drawable/redo" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_bold"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -37,7 +37,7 @@
         android:contentDescription="@null"
         android:src="@drawable/bold" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_italic"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -45,7 +45,7 @@
         android:contentDescription="@null"
         android:src="@drawable/italic" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_subscript"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -53,7 +53,7 @@
         android:contentDescription="@null"
         android:src="@drawable/subscript" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_superscript"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -61,7 +61,7 @@
         android:contentDescription="@null"
         android:src="@drawable/superscript" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_strikethrough"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -69,7 +69,7 @@
         android:contentDescription="@null"
         android:src="@drawable/strikethrough" />
 
-      <ImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/action_underline"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -77,7 +77,7 @@
         android:contentDescription="@null"
         android:src="@drawable/underline" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading1"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -85,7 +85,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h1" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading2"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -93,7 +93,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h2" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading3"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -101,7 +101,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h3" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading4"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -109,7 +109,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h4" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading5"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -117,7 +117,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h5" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_heading6"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -125,7 +125,7 @@
         android:contentDescription="@null"
         android:src="@drawable/h6" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_txt_color"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -133,7 +133,7 @@
         android:contentDescription="@null"
         android:src="@drawable/txt_color" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_bg_color"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -142,7 +142,7 @@
         android:src="@drawable/bg_color" />
 
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_indent"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -150,7 +150,7 @@
         android:contentDescription="@null"
         android:src="@drawable/indent" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_outdent"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -158,7 +158,7 @@
         android:contentDescription="@null"
         android:src="@drawable/outdent" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_align_left"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -166,7 +166,7 @@
         android:contentDescription="@null"
         android:src="@drawable/justify_left" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_align_center"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -174,7 +174,7 @@
         android:contentDescription="@null"
         android:src="@drawable/justify_center" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_align_right"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -182,7 +182,7 @@
         android:contentDescription="@null"
         android:src="@drawable/justify_right" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_insert_bullets"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -190,7 +190,7 @@
         android:contentDescription="@null"
         android:src="@drawable/bullets" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_insert_numbers"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -198,7 +198,7 @@
         android:contentDescription="@null"
         android:src="@drawable/numbers" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_blockquote"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -206,7 +206,7 @@
         android:contentDescription="@null"
         android:src="@drawable/blockquote" />
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_insert_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -214,7 +214,7 @@
         android:contentDescription="@null"
         android:src="@drawable/insert_image" />
 
-      <ImageButton
+      <!--<ImageButton
         android:id="@+id/action_insert_audio"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -236,9 +236,9 @@
         android:layout_height="48dp"
         android:background="@null"
         android:contentDescription="@null"
-        android:src="@drawable/youtube" />
+        android:src="@drawable/youtube" />-->
 
-      <ImageButton
+      <jp.wasabeef.richeditor.WriteCustomButton
         android:id="@+id/action_insert_link"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -246,7 +246,7 @@
         android:contentDescription="@null"
         android:src="@drawable/insert_link" />
 
-      <ImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/action_insert_checkbox"
         android:layout_width="48dp"
         android:layout_height="48dp"

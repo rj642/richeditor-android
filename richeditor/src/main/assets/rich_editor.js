@@ -29,6 +29,12 @@ RE.currentSelection = {
 
 RE.editor = document.getElementById('editor');
 
+//RE.textbox = function() {
+//  var ctl = document.getElementById('Javascript_example');
+//  var startPos = ctl.selectionStart;
+//  var endPos = ctl.selectionEnd;
+//}
+
 document.addEventListener("selectionchange", function() { RE.backuprange(); });
 
 // Initializations
@@ -352,6 +358,17 @@ RE.focus = function() {
     RE.editor.focus();
 }
 
+RE.clearAndFocusEditor = function() {
+    var range = document.createRange();
+    range.selectNodeContents(RE.editor);
+    range.collapse(false);
+    var selection = window.getSelection();
+    if(selection.toString().length == 0){
+        RE.editor.blur();
+        RE.editor.focus();
+     }
+}
+
 RE.blurFocus = function() {
     RE.editor.blur();
 }
@@ -369,7 +386,7 @@ RE.editor.addEventListener("input", RE.callback);
 RE.editor.addEventListener("keyup", function(e) {
     var KEY_LEFT = 37, KEY_RIGHT = 39, KEY_ENTER = 13;
     console.log(e.keyCode,e.which, e.code,e.key)
-    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER)
+    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER) {
         RE.setDiv();
         var elems = document.body.getElementsByTagName("*");
 
@@ -383,6 +400,7 @@ RE.editor.addEventListener("keyup", function(e) {
           if (d.localName == "blockquote" && d.innerText == "\n") {
             elems[x].remove();
           }
+
         }
     }
     if (e.which == KEY_LEFT || e.which == KEY_RIGHT) {

@@ -1,18 +1,31 @@
 package jp.wasabeef.sample;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import jp.wasabeef.richeditor.RichEditor;
+import jp.wasabeef.richeditor.WriteCustomButton;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
   private RichEditor mEditor;
   private TextView mPreview;
+  private ArrayList<WriteCustomButton> Buttons;
+  private WriteCustomButton textBoldButton;
+  private WriteCustomButton textQuoteButton;
+  private WriteCustomButton textItalicButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +51,72 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    class DecorationButtonListener implements View.OnClickListener {
+
+      @Override
+      public void onClick(View view){
+        if(view instanceof WriteCustomButton) {
+          WriteCustomButton button = (WriteCustomButton) view;
+
+          mEditor.clearAndFocusEditor();
+          if(button.getId() == R.id.action_bold)
+            mEditor.setBold();
+          else if (button.getId() == R.id.action_blockquote) {
+            mEditor.setBlockquote();
+            mEditor.quoteActive = true;
+          }
+          else if (button.getId() == R.id.action_italic) {
+            mEditor.setItalic();
+          }
+          if(button.getCheckedState()) {
+            button.setColorFilter(Color.WHITE);
+            button.switchCheckedState();
+            mEditor.quoteActive = false;
+          }
+          else {
+            button.setColorFilter(Color.BLUE);
+            button.switchCheckedState();
+          }
+
+        }
+      }
+    }
+
+    mEditor.setOnDecorationChangeListener(new RichEditor.OnDecorationStateListener() {
+      @Override public void onStateChangeListener(String text, List<RichEditor.Type> types) {
+        Buttons = new ArrayList<>(
+          Arrays.asList(textBoldButton, textQuoteButton, textItalicButton));
+        for(RichEditor.Type type : types) {
+          switch(type) {
+            case BOLD:
+              textBoldButton.setColorFilter(Color.BLUE);
+              if(!textBoldButton.getCheckedState())
+                textBoldButton.switchCheckedState();
+              Buttons.remove(textBoldButton);
+              break;
+            case QUOTEBLOCK:
+              textQuoteButton.setColorFilter(Color.BLUE);
+              if(!textQuoteButton.getCheckedState())
+                textQuoteButton.switchCheckedState();
+              Buttons.remove(textQuoteButton);
+              break;
+            case ITALIC:
+              textItalicButton.setColorFilter(Color.BLUE);
+              if (!textItalicButton.getCheckedState())
+                textItalicButton.switchCheckedState();
+              Buttons.remove(textItalicButton);
+              break;
+          }
+        }
+        for(WriteCustomButton button : Buttons){
+          button.setColorFilter(Color.WHITE);
+          button.setCheckedState(false);
+        }
+      }
+    });
+
+    DecorationButtonListener decorationButtonListener = new DecorationButtonListener();
+
     findViewById(R.id.action_undo).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -52,19 +131,31 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        mEditor.setBold();
-      }
-    });
+    //findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
+    //  @Override
+    //  public void onClick(View v) {
+    //    mEditor.setBold();
+    //  }
+    //});
 
-    findViewById(R.id.action_italic).setOnClickListener(new View.OnClickListener() {
+    textBoldButton = findViewById(R.id.action_bold);
+
+    textBoldButton.setOnClickListener(decorationButtonListener);
+
+    textQuoteButton = findViewById(R.id.action_blockquote);
+
+    textQuoteButton.setOnClickListener(decorationButtonListener);
+
+    textItalicButton = findViewById(R.id.action_italic);
+
+    textItalicButton.setOnClickListener(decorationButtonListener);
+
+    /*findViewById(R.id.action_italic).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mEditor.setItalic();
       }
-    });
+    });*/
 
     findViewById(R.id.action_subscript).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -191,12 +282,12 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    findViewById(R.id.action_blockquote).setOnClickListener(new View.OnClickListener() {
+    /*findViewById(R.id.action_blockquote).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mEditor.setBlockquote();
       }
-    });
+    });*/
 
     findViewById(R.id.action_insert_bullets).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -220,26 +311,26 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    findViewById(R.id.action_insert_youtube).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        mEditor.insertYoutubeVideo("https://www.youtube.com/embed/pS5peqApgUA");
-      }
-    });
-
-    findViewById(R.id.action_insert_audio).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        mEditor.insertAudio("https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3");
-      }
-    });
-
-    findViewById(R.id.action_insert_video).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        mEditor.insertVideo("https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_10MB.mp4", 360);
-      }
-    });
+    //findViewById(R.id.action_insert_youtube).setOnClickListener(new View.OnClickListener() {
+    //  @Override
+    //  public void onClick(View v) {
+    //    mEditor.insertYoutubeVideo("https://www.youtube.com/embed/pS5peqApgUA");
+    //  }
+    //});
+    //
+    //findViewById(R.id.action_insert_audio).setOnClickListener(new View.OnClickListener() {
+    //  @Override
+    //  public void onClick(View v) {
+    //    mEditor.insertAudio("https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3");
+    //  }
+    //});
+    //
+    //findViewById(R.id.action_insert_video).setOnClickListener(new View.OnClickListener() {
+    //  @Override
+    //  public void onClick(View v) {
+    //    mEditor.insertVideo("https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_10MB.mp4", 360);
+    //  }
+    //});
 
     findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
       @Override

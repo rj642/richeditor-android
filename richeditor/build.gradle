@@ -18,6 +18,7 @@ android {
 dependencies {
   testImplementation "junit:junit:4.13"
   testImplementation "org.robolectric:robolectric:4.3.1"
+  implementation "androidx.appcompat:appcompat:1.2.0"
 }
 
 ext {
