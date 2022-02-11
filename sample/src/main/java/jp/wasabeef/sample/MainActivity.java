@@ -64,7 +64,11 @@ public class MainActivity extends AppCompatActivity {
           mEditor.clearAndFocusEditor();
           if(button.getId() == R.id.action_bold) {
             mEditor.setBold();
-            mEditor.activeStyle = "bold";
+            if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+              //mEditor.activeStyle = "bold";
+            } else {
+              mEditor.activeStyle = "bold";
+            }
           }
           else if (button.getId() == R.id.action_blockquote) {
             mEditor.setBlockquote();
@@ -72,11 +76,19 @@ public class MainActivity extends AppCompatActivity {
           }
           else if (button.getId() == R.id.action_italic) {
             mEditor.setItalic();
-            mEditor.activeStyle = "italic";
+            if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+              //mEditor.activeStyle = "bold";
+            } else {
+              mEditor.activeStyle = "italic";
+            }
           }
           else if (button.getId() == R.id.action_strikethrough) {
             mEditor.setStrikeThrough();
-            mEditor.activeStyle = "strike";
+            if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+              //mEditor.activeStyle = "bold";
+            } else {
+              mEditor.activeStyle = "strike";
+            }
           }
           else if (button.getId() == R.id.action_insert_checkbox) {
             mEditor.insertTodo();
@@ -96,13 +108,25 @@ public class MainActivity extends AppCompatActivity {
             button.switchCheckedState();
             switch (button.getId()) {
               case R.id.action_bold:
-                mEditor.activeStyle = "bold";
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "bold";
+                }
                 break;
               case R.id.action_italic:
-                mEditor.activeStyle = "italic";
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "italic";
+                }
                 break;
               case R.id.action_strikethrough:
-                mEditor.activeStyle = "strike";
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "strike";
+                }
                 break;
               case R.id.action_blockquote:
                 mEditor.activeStyle = "quote";
@@ -131,7 +155,11 @@ public class MainActivity extends AppCompatActivity {
           switch(type) {
             case BOLD:
               textBoldButton.setColorFilter(Color.BLUE);
-              mEditor.activeStyle = "bold";
+              if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                //mEditor.activeStyle = "bold";
+              } else {
+                mEditor.activeStyle = "bold";
+              }
               if(!textBoldButton.getCheckedState()) {
                 textBoldButton.switchCheckedState();
               }
@@ -149,7 +177,11 @@ public class MainActivity extends AppCompatActivity {
               textItalicButton.setColorFilter(Color.BLUE);
               if (!textItalicButton.getCheckedState()) {
                 textItalicButton.switchCheckedState();
-                mEditor.activeStyle = "italic";
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "italic";
+                }
               }
               Buttons.remove(textItalicButton);
               break;
@@ -173,7 +205,11 @@ public class MainActivity extends AppCompatActivity {
               textStrikeButton.setColorFilter(Color.BLUE);
               if (!textStrikeButton.getCheckedState()) {
                 textStrikeButton.switchCheckedState();
-                mEditor.activeStyle = "strike";
+                if (mEditor.activeStyle.equals("quote") || mEditor.activeStyle.equals("todo") || mEditor.activeStyle.equals("code")) {
+                  //mEditor.activeStyle = "bold";
+                } else {
+                  mEditor.activeStyle = "strike";
+                }
               }
               Buttons.remove(textStrikeButton);
               break;
