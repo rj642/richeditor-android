@@ -12,6 +12,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -116,6 +120,29 @@ public class RichEditor extends WebView {
     loadUrl(SETUP_HTML);
 
     applyAttributes(context, attrs);
+  }
+
+  @Override
+  public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+    return new BaseInputConnection(this, false); //this is needed for #dispatchKeyEvent() to be notified.
+  }
+
+  @Override
+  public boolean dispatchKeyEvent(KeyEvent event) {
+    boolean dispatchFirst = super.dispatchKeyEvent(event);
+    // Listening here for whatever key events you need
+    if (event.getAction() == KeyEvent.ACTION_UP) {
+      // which mardkown button is selected ? 
+      System.out.println("Printing key");
+      System.out.println(event.getKeyCode());
+      switch (event.getKeyCode()) {
+        case KeyEvent.KEYCODE_SPACE:
+        case KeyEvent.KEYCODE_ENTER:
+          // e.g. get space and enter events here
+          break;
+      }
+    }
+    return dispatchFirst;
   }
 
   protected EditorWebViewClient createWebviewClient() {
@@ -305,7 +332,8 @@ public class RichEditor extends WebView {
   }
 
   public void setItalic() {
-    exec("javascript:RE.setItalic();");
+    exec("javascript:RE.prepareInsert();");
+    exec("javascript:RE.setTodo('" + Utils.getCurrentTime() + "');");
   }
 
   public void setSubscript() {

@@ -368,7 +368,8 @@ RE.forwardDelete = function() {
 RE.editor.addEventListener("input", RE.callback);
 RE.editor.addEventListener("keyup", function(e) {
     var KEY_LEFT = 37, KEY_RIGHT = 39, KEY_ENTER = 13;
-    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER) {
+    console.log(e.keyCode,e.which, e.code,e.key)
+    if (e.keyCode == KEY_ENTER || e.which == KEY_ENTER)
         RE.setDiv();
         var elems = document.body.getElementsByTagName("*");
 
