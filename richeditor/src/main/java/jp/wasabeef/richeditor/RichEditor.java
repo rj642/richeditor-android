@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -27,8 +26,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import static jp.wasabeef.richeditor.RichEditor.Type.BOLD;
 
 /**
  * Copyright (C) 2020 Wasabeef
@@ -132,39 +129,34 @@ public class RichEditor extends WebView {
   }
 
   public String activeStyle = "none";
+  public Boolean activeQuote = false;
 
-  @Override
-  public boolean dispatchKeyEvent(KeyEvent event) {
-    boolean dispatchFirst = super.dispatchKeyEvent(event);
-    // Listening here for whatever key events you need
-    if (event.getAction() == KeyEvent.ACTION_UP) {
-      if (event.getKeyCode() == 66) {
-        if (activeStyle == "quote") {
-          exec("javascript:RE.removeBlockquote();");
-          // remove active style from quote.
-        }
-        if (activeStyle == "code") {
-          exec("javascript:RE.removeCodeblock();");
-          // remove activeStyle from code.
-        }
-        if (activeStyle == "todo") {
-          exec("javascript:RE.removeCodeblock();");
-          // remove activeStyle from
-        }
-      }
-      System.out.println(activeStyle);
-      System.out.println("value is as follow");
-      System.out.println("Printing key");
-      System.out.println(event.getKeyCode());
-      switch (event.getKeyCode()) {
-        case KeyEvent.KEYCODE_SPACE:
-        case KeyEvent.KEYCODE_ENTER:
-          // e.g. get space and enter events here
-          break;
-      }
-    }
-    return dispatchFirst;
-  }
+  //@Override
+  //public boolean dispatchKeyEvent(KeyEvent event) {
+  //  boolean dispatchFirst = super.dispatchKeyEvent(event);
+  //  // Listening here for whatever key events you need
+  //  if (event.getAction() == KeyEvent.ACTION_UP) {
+  //    System.out.println(activeStyle);
+  //    if (event.getKeyCode() == 66) {
+  //      //switch (activeStyle) {
+  //      //  case "quote":
+  //      //    exec("javascript:RE.removeBlockquote();");
+  //      //    activeStyle = "none";
+  //      //    break;
+  //      //  case "code":
+  //      //    exec("javascript:RE.removeCodeblock();");
+  //      //    activeStyle = "none";
+  //      //    break;
+  //      //  case "todo":
+  //      //    //exec("javascript:RE.repeatTodo();");
+  //      //    break;
+  //      //}
+  //    }
+  //    System.out.println(activeStyle);
+  //    System.out.println("value is as follow");
+  //  }
+  //  return dispatchFirst;
+  //}
 
   protected EditorWebViewClient createWebviewClient() {
     return new EditorWebViewClient();

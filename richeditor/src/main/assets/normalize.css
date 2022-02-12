@@ -99,17 +99,6 @@ blockquote {
    	border-left: 6px solid rgba(153, 207, 149, 1);
 }
 
-.blockquote {
-    margin: 0px;
-    padding-left: 1.0em;
-    font-style: italic;
-    overflow: hidden;
-    font-color: red;
-    background: rgba(224, 250, 222, 1);
-   	border-left: 4px solid rgba(153, 207, 149, 1);
-}
-
-
 
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
